@@ -16,6 +16,12 @@ enum Commands {
         #[arg(short, long)]
         force: bool,
     },
+    /// Pull the current branch and its dependencies
+    Pull {
+        /// Reset the current branch to match the remote
+        #[arg(short, long)]
+        force: bool,
+    },
     /// Rebase the current branch and all dependent branches
     Rebase {
         /// Base branch to rebase onto
@@ -33,15 +39,19 @@ fn main() -> Result<()> {
     match cli.command {
         Commands::Push { force } => {
             println!("Pushing branches (force: {})", force);
-            Ok(())
+            todo!()
         }
         Commands::Rebase { base } => {
             println!("Rebasing onto {}", base);
-            Ok(())
+            todo!()
         }
         Commands::List => {
             println!("Listing stacked branches");
-            Ok(())
+            todo!()
+        },
+        Commands::Pull { force } => {
+            println!("Pulling branches (force: {})", force);
+            todo!()
         }
     }
 }

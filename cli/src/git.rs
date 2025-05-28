@@ -3,6 +3,7 @@ use git2::{Repository, Branch, BranchType};
 
 pub struct GitStack {
     repo: Repository,
+    branches: Vec<String>,
 }
 
 impl GitStack {
