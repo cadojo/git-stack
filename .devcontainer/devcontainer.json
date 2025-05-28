@@ -15,6 +15,7 @@
 		}
 	},
 	"postCreateCommand": {
-		"initialize starship": "echo 'eval \"$(starship init bash)\"' >> ~/.bashrc"
+		"initialize starship": "echo 'eval \"$(starship init bash)\"' >> ~/.bashrc",
+		"expose debug build": "echo 'export PATH=$(realpath .)/cli/target/debug:$PATH' >> ~/.bashrc"
 	}
 }
