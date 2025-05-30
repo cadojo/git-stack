@@ -1,39 +1,29 @@
-use anyhow::Result;
-use git2::{Repository, Branch, BranchType};
+use git2::{Branch, Repository};
 
-pub struct GitStack {
-    repo: Repository,
-    branches: Vec<String>,
+pub struct Stack<'a> {
+    /// the core Git repository that this stack is associated with
+    pub repository: Repository,
+
+    /// an ordered list of branches in the stack
+    pub branches: Vec<Branch<'a>>,
 }
 
-impl GitStack {
-    pub fn new() -> Result<Self> {
-        let repo = Repository::open_from_env()?;
-        Ok(Self { repo })
-    }
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-    pub fn get_current_branch(&self) -> Result<Branch> {
-        let head = self.repo.head()?;
-        let branch = Branch::wrap(head);
-        Ok(branch)
-    }
+    #[test]
+    fn test_add() {
+        // construct a repository from the GIT_DIR environment variable
+        let repo = Repository::open_from_env().expect("Failed to open repository");
 
-    pub fn get_dependent_branches(&self, base: &str) -> Result<Vec<Branch>> {
-        let mut deps = Vec::new();
-        let branches = self.repo.branches(Some(BranchType::Local))?;
-        
-        // TODO: Implement branch dependency detection
-        
-        Ok(deps)
-    }
+        // print repository content
+        println!("Repostirory: {:?}", repo.path());
 
-    pub fn rebase_branch(&self, branch: &Branch, onto: &str) -> Result<()> {
-        // TODO: Implement branch rebasing
-        Ok(())
-    }
-
-    pub fn push_branches(&self, branches: &[Branch], force: bool) -> Result<()> {
-        // TODO: Implement branch pushing
-        Ok(())
+        #[allow(unused_variables)]
+        let stack = Stack {
+            repository: repo,
+            branches: Vec::new(),
+        };
     }
 }

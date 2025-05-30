@@ -1,6 +1,9 @@
 {
 	"name": "git-stack",
 	"image": "mcr.microsoft.com/devcontainers/rust:1-1-bullseye",
+	"containerEnv": {
+		"GIT_DIR": "${localWorkspaceFolder}"
+	},
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {
 			"ppa": true,
